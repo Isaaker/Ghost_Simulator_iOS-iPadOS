@@ -11,7 +11,7 @@ import SwiftUI
 struct ghost_archery_simApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Navigation()
         }
     }
 }
