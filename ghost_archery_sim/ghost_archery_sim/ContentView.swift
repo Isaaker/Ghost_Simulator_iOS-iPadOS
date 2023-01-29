@@ -118,8 +118,18 @@ struct app_info: View {
 
 struct user_info: View {
     @AppStorage("user_name") var user_name: String = ""
-    @AppStorage("user_discipline") var user_discipline: String = "None"
-    @AppStorage("user_season") var user_season: String = "None"
+    //Discipline
+    enum disciplines: String, CaseIterable, Identifiable {
+        case compound, olympic, long_bow, traditional_recurve, bare_bow, none
+        var id: Self { self }
+    }
+    @AppStorage("user_discipline") var user_discipline: disciplines = .none
+    //Season
+    enum seasons: String, CaseIterable, Identifiable {
+        case indoor, outdoor, none
+        var id: Self { self }
+    }
+    @AppStorage("user_season") var user_season: seasons = .none
     @AppStorage("user_notes") var user_notes: String = "Here you can take your notes, point your scopes and more..."
     var body: some View {
         HStack{
@@ -128,25 +138,31 @@ struct user_info: View {
             Text("User Info")
                 .font(.title)
         }
-        Spacer()
-        List(){
+        Divider()
+        List{
             TextField("User Name", text: $user_name)
             Picker(selection: $user_discipline, label: Text("Discipline")) {
-                Text("None").tag(1)
-                Text("Compound").tag(2)
-                Text("Olympic").tag(3)
-                Text("Long Bow").tag(4)
-                Text("Traditional Recurve").tag(5)
-                Text("Bare-Bow").tag(6)
+                Text("None").tag(disciplines.none)
+                Text("Compound").tag(disciplines.compound)
+                Text("Olympic").tag(disciplines.olympic)
+                Text("Long Bow").tag(disciplines.long_bow)
+                Text("Traditional Recurve").tag(disciplines.traditional_recurve)
+                Text("Bare-Bow").tag(disciplines.bare_bow)
             }
             Picker(selection: $user_season, label: Text("Season")) {
-                Text("None").tag(1)
-                Text("Indoor").tag(2)
-                Text("Outdoor").tag(3)
+                Text("None").tag(seasons.none)
+                Text("Indoor").tag(seasons.indoor)
+                Text("Outdoor").tag(seasons.outdoor)
             }
+        }
+        GroupBox(content: {
+            HStack{
+                Image(systemName: "note.text")
+                Text("Notes")
+        }
+        }){
             TextEditor(text: $user_notes)
         }
-        Spacer()
     }
 }
 
