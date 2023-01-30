@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct Navigation: View {
+    @State var app_banner: Bool = true
     var body: some View {
         VStack {
+            HStack{
+                Image("app_icon")
+                    .resizable()
+                Text("Ghost Archery Sim")
+                    .font(.title)
+            }
             NavigationView(){
                 List{
                     NavigationLink(destination: Home()){
@@ -19,6 +26,9 @@ struct Navigation: View {
                             Text("Home")
                         }
                     }
+                    .task{
+                        app_banner = false
+                    }
                     NavigationLink(destination: Simulator()){
                         HStack{
                             Image(systemName: "figure.archery")
@@ -26,12 +36,18 @@ struct Navigation: View {
                             Text("Simulator")
                         }
                     }
+                    .task{
+                        app_banner = false
+                    }
                     NavigationLink(destination: Settings()){
                         HStack{
                             Image(systemName: "gear")
                                 .foregroundColor(.gray)
                             Text("Settings")
                         }
+                    }
+                    .task{
+                        app_banner = false
                     }
                 }
             }
@@ -194,6 +210,7 @@ struct appstorage: View {
             Button("Remove", role: .destructive){
                 isPresented = true
             }
+            
             }
         .alert(isPresented: $isPresented, content: {
             Alert(title: Text("App Storage"),
