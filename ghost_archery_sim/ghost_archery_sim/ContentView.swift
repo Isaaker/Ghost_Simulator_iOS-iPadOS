@@ -87,7 +87,7 @@ struct Simulator: View {
     
     //Points settings
     
-    @AppStorage("max_points") var max_points = 0
+    @AppStorage("max_points") var max_points = 2
     @AppStorage("min_points") var min_points = 0
     
     var body: some View {
@@ -171,20 +171,20 @@ struct Simulator: View {
             //Season
             if user_season == seasons.outdoor{
                 VStack{
-                    Stepper(value: $min_points, in: 1...max_points - 1) {
+                    Stepper(value: $min_points, in: 1...max_points-1) {
                         Text("Min. Points: \(min_points)")
                     }
-                    Stepper(value: $max_points, in: 1...720) {
+                    Stepper(value: $max_points, in: min_points+1...720) {
                         Text("Max. Points: \(max_points)")
                     }
                 }
             }
             if user_season == seasons.indoor{
                 VStack{
-                    Stepper(value: $min_points, in: 1...max_points - 1) {
+                    Stepper(value: $min_points, in: 1...max_points-1) {
                         Text("Min. Points: \(min_points)")
                     }
-                    Stepper(value: $max_points, in: 1...600) {
+                    Stepper(value: $max_points, in: min_points+1...600) {
                         Text("Max. Points: \(max_points)")
                     }
                 }
@@ -212,13 +212,17 @@ struct Simulator: View {
 //Simulation
 
 struct simulation: View {
+    //App Storage
+    @AppStorage("max_points") var max_points = 2
+    @AppStorage("min_points") var min_points = 0
     var body: some View {
-        VStack {
-            Image(systemName: "gear.badge.checkmark")
-                .foregroundColor(.green)
-            Text("Simulation is Working")
-                .font(.title)
-        }
+
+        Text("Data")
+            .font(.title)
+        Text("Max Points: \(max_points)")
+        Text("Min Points: \(min_points)")
+        
+        Text("")
     }
 }
 
@@ -259,6 +263,13 @@ struct Settings: View {
 
 //Settings Sub Menu
 struct app_info: View {
+    //App Version
+    func getVersion() -> String {
+        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return "no version info"
+        }
+        return version
+    }
     var body: some View {
         HStack{
             Image(systemName: "info.circle.fill")
@@ -269,10 +280,39 @@ struct app_info: View {
         List{
             HStack{
                 Text("App Version:")
-                Text("1")
+                Text(getVersion())
             }
             HStack{
                 Text("Code Source:")
+                Link(destination: URL(string: "https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS")!){
+                    Text("GitHub")
+                }
+            }
+            HStack{
+                Image(systemName: "hammer.fill")
+                    .foregroundColor(.blue)
+                Text("Developed by:")
+                Link("Isaaker",destination: URL(string: "https://github.com/Isaaker")!)
+            }
+            HStack{
+                Image(systemName: "swift")
+                    .foregroundColor(.red)
+                Text("Works with:")
+                Link("Swift",destination: URL(string: "https://www.swift.org")!)
+
+            }
+            HStack{
+                Image(systemName: "scribble.variable")
+                    .foregroundColor(.pink)
+                Text("Drawed by:")
+                Link("Erica Hernán",destination: URL(string: "https://www.instagram.com/eri.hernan_art/")!)
+            }
+            HStack{
+                Image(systemName: "person.3.fill")
+                    .foregroundColor(.yellow)
+                Text("Special Thanks:")
+                Link("Antonio Hernán",destination: URL(string: "https://github.com/antoniohernan")!)
+
             }
         }
     }
