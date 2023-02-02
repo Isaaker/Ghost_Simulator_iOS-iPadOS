@@ -299,15 +299,13 @@ Contact Licensor:
             else{
                 VStack {
                     HStack{
-                        Image("app_icon")
+                        Image("banner")
                             .resizable()
-                            .frame(width:50 ,height:50)
+                            .frame(width:380 ,height:100)
                         //Reset Views
                             .task{
                                 Navigation_hidden = true
                             }
-                        Text("Ghost Archery Sim")
-                            .font(.title)
                     }
                     if Navigation_hidden == true{
                         NavigationView(content: {Home()})
@@ -348,24 +346,8 @@ Contact Licensor:
 
 struct Home: View {
     @AppStorage ("Navigation_hidden") var Navigation_hidden: Bool = true
-    
-    
-    //User Settings
-    @AppStorage("user_name") var user_name: String = ""
-    //Discipline
-    enum disciplines: String, CaseIterable, Identifiable {
-        case compound, olympic, long_bow, traditional_recurve, bare_bow, none
-        var id: Self { self }
-    }
-    @AppStorage("user_discipline") var user_discipline: disciplines = .none
-    //Season
-    enum seasons: String, CaseIterable, Identifiable {
-        case indoor, outdoor, none
-        var id: Self { self }
-    }
-    @AppStorage("user_season") var user_season: seasons = .none
     @AppStorage("user_info_banner") var user_info_banner: Bool = true
-    
+    @AppStorage("user_info_setup") var user_info_setup: Bool = false
     var body: some View {
         VStack{
             HStack{
@@ -381,12 +363,10 @@ struct Home: View {
             Spacer()
             }
             VStack {
-                if user_info_banner == true{
-                    VStack{
-                        Text("Welcome to Ghost Archery Simulator")
-                            .font(.title)
-                    }
-                }
+                Image("appicon")
+                Text("Welcome to Ghost Archery Simulator")
+                    .font(.title)
+                Divider()
                 
             }
             Spacer()
@@ -575,12 +555,15 @@ struct simulation: View {
             }
         }
         Spacer()
-        NavigationLink(destination: Home()){
+        Button(action: {
+            //Some Actions
+            
+        }, label:{
             HStack{
                 Image(systemName: "stop.circle.fill")
                 Text("Finish & Save Simulation")
             }
-        }
+        })
         .buttonStyle(.borderedProminent)
         Spacer()
     }
