@@ -7,26 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A6852FF3298BAF6800A3DDED /* ghost_simulator_watchOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6852FF2298BAF6800A3DDED /* ghost_simulator_watchOSApp.swift */; };
-		A6852FF5298BAF6800A3DDED /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6852FF4298BAF6800A3DDED /* ContentView.swift */; };
-		A6852FF7298BAF6900A3DDED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6852FF6298BAF6900A3DDED /* Assets.xcassets */; };
-		A6852FFA298BAF6900A3DDED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6852FF9298BAF6900A3DDED /* Preview Assets.xcassets */; };
-		A6852FFD298BAF6900A3DDED /* Simulator.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A6852FF0298BAF6800A3DDED /* Simulator.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A6D736DB2985064F006CBC71 /* ghost_archery_simApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D736DA2985064F006CBC71 /* ghost_archery_simApp.swift */; };
 		A6D736DD2985064F006CBC71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D736DC2985064F006CBC71 /* ContentView.swift */; };
 		A6D736DF29850650006CBC71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6D736DE29850650006CBC71 /* Assets.xcassets */; };
 		A6D736E329850650006CBC71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6D736E229850650006CBC71 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		A6852FFB298BAF6900A3DDED /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A6D736CF2985064F006CBC71 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A6852FEF298BAF6800A3DDED;
-			remoteInfo = "ghost_simulator_watchOS Watch App";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		A6852FFE298BAF6900A3DDED /* Embed Watch Content */ = {
@@ -35,7 +20,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				A6852FFD298BAF6900A3DDED /* Simulator.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,11 +27,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A6852FF0298BAF6800A3DDED /* Simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6852FF2298BAF6800A3DDED /* ghost_simulator_watchOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ghost_simulator_watchOSApp.swift; sourceTree = "<group>"; };
-		A6852FF4298BAF6800A3DDED /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		A6852FF6298BAF6900A3DDED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A6852FF9298BAF6900A3DDED /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A6D736D72985064F006CBC71 /* ghost_archery_sim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ghost_archery_sim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6D736DA2985064F006CBC71 /* ghost_archery_simApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ghost_archery_simApp.swift; sourceTree = "<group>"; };
 		A6D736DC2985064F006CBC71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,13 +36,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A6852FED298BAF6800A3DDED /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A6D736D42985064F006CBC71 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -74,31 +46,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A6852FF1298BAF6800A3DDED /* ghost_simulator_watchOS Watch App */ = {
+		A62A7B5B298BB3E000013D58 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A6852FF2298BAF6800A3DDED /* ghost_simulator_watchOSApp.swift */,
-				A6852FF4298BAF6800A3DDED /* ContentView.swift */,
-				A6852FF6298BAF6900A3DDED /* Assets.xcassets */,
-				A6852FF8298BAF6900A3DDED /* Preview Content */,
 			);
-			path = "ghost_simulator_watchOS Watch App";
-			sourceTree = "<group>";
-		};
-		A6852FF8298BAF6900A3DDED /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				A6852FF9298BAF6900A3DDED /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A6D736CE2985064F006CBC71 = {
 			isa = PBXGroup;
 			children = (
 				A6D736D92985064F006CBC71 /* ghost_archery_sim */,
-				A6852FF1298BAF6800A3DDED /* ghost_simulator_watchOS Watch App */,
 				A6D736D82985064F006CBC71 /* Products */,
+				A62A7B5B298BB3E000013D58 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				A6D736D72985064F006CBC71 /* ghost_archery_sim.app */,
-				A6852FF0298BAF6800A3DDED /* Simulator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,23 +93,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A6852FEF298BAF6800A3DDED /* ghost_simulator_watchOS Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A6853001298BAF6900A3DDED /* Build configuration list for PBXNativeTarget "ghost_simulator_watchOS Watch App" */;
-			buildPhases = (
-				A6852FEC298BAF6800A3DDED /* Sources */,
-				A6852FED298BAF6800A3DDED /* Frameworks */,
-				A6852FEE298BAF6800A3DDED /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "ghost_simulator_watchOS Watch App";
-			productName = "ghost_simulator_watchOS Watch App";
-			productReference = A6852FF0298BAF6800A3DDED /* Simulator.app */;
-			productType = "com.apple.product-type.application";
-		};
 		A6D736D62985064F006CBC71 /* ghost_archery_sim */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6D736E629850650006CBC71 /* Build configuration list for PBXNativeTarget "ghost_archery_sim" */;
@@ -163,7 +105,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A6852FFC298BAF6900A3DDED /* PBXTargetDependency */,
 			);
 			name = ghost_archery_sim;
 			productName = ghost_archery_sim;
@@ -180,9 +121,6 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
-					A6852FEF298BAF6800A3DDED = {
-						CreatedOnToolsVersion = 14.2;
-					};
 					A6D736D62985064F006CBC71 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -202,21 +140,11 @@
 			projectRoot = "";
 			targets = (
 				A6D736D62985064F006CBC71 /* ghost_archery_sim */,
-				A6852FEF298BAF6800A3DDED /* ghost_simulator_watchOS Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A6852FEE298BAF6800A3DDED /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A6852FFA298BAF6900A3DDED /* Preview Assets.xcassets in Resources */,
-				A6852FF7298BAF6900A3DDED /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A6D736D52985064F006CBC71 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -229,15 +157,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A6852FEC298BAF6800A3DDED /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A6852FF5298BAF6800A3DDED /* ContentView.swift in Sources */,
-				A6852FF3298BAF6800A3DDED /* ghost_simulator_watchOSApp.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A6D736D32985064F006CBC71 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,76 +168,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		A6852FFC298BAF6900A3DDED /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A6852FEF298BAF6800A3DDED /* ghost_simulator_watchOS Watch App */;
-			targetProxy = A6852FFB298BAF6900A3DDED /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		A6852FFF298BAF6900A3DDED /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ghost_simulator_watchOS Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = Z625264Y43;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "isaaker.ghost-archery-sim";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "isaaker.ghost-archery-sim.watchkitapp";
-				PRODUCT_NAME = Simulator;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
-			};
-			name = Debug;
-		};
-		A6853000298BAF6900A3DDED /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ghost_simulator_watchOS Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = Z625264Y43;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "isaaker.ghost-archery-sim";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "isaaker.ghost-archery-sim.watchkitapp";
-				PRODUCT_NAME = Simulator;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
-			};
-			name = Release;
-		};
 		A6D736E429850650006CBC71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -519,15 +369,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A6853001298BAF6900A3DDED /* Build configuration list for PBXNativeTarget "ghost_simulator_watchOS Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A6852FFF298BAF6900A3DDED /* Debug */,
-				A6853000298BAF6900A3DDED /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		A6D736D22985064F006CBC71 /* Build configuration list for PBXProject "ghost_archery_sim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
