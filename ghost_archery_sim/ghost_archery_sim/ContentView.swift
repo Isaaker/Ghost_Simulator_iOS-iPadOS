@@ -519,11 +519,31 @@ struct Simulator: View {
 //Simulation
 
 struct simulation: View {
+    //User Info
+    //User Settings
+    @AppStorage("user_name") var user_name: String = ""
+    //Discipline
+    enum disciplines: String, CaseIterable, Identifiable {
+        case compound, olympic, long_bow, traditional_recurve, bare_bow, none
+        var id: Self { self }
+    }
+    @AppStorage("user_discipline") var user_discipline: disciplines = .none
+    //Season
+    enum seasons: String, CaseIterable, Identifiable {
+        case indoor, outdoor, none
+        var id: Self { self }
+    }
+    @AppStorage("user_season") var user_season: seasons = .none
     //Random Number Generator
     let randInt = Int.random(in: 0...100)
     //App Storage
+    //Points
     @AppStorage("max_points") var max_points = 2
     @AppStorage("min_points") var min_points = 0
+    //Points Storage
+    @AppStorage("currents_points") var currents_points = 0
+    //Finish Message
+    @State var finish_message: Bool = false
     var body: some View {
 
         Text("Simulation")
@@ -532,6 +552,7 @@ struct simulation: View {
             Text("Max Points: \(max_points)")
             Text("Min Points: \(min_points)")
         }
+        Text("The points needs to be entered by set")
         Spacer()
         HStack{
             VStack{
@@ -540,7 +561,7 @@ struct simulation: View {
                     .foregroundColor(.gray)
                 Divider()
                 ScrollView{
-                    
+                    Text("Random Number")
                 }
             }
             Divider()
@@ -550,14 +571,23 @@ struct simulation: View {
                     .foregroundColor(.blue)
                 Divider()
                 ScrollView{
-                    
+                    if user_season == seasons.indoor{
+                        Stepper(value: $currents_points, in: 1...30) {
+                            Text("Points in this set: \(currents_points)")
+                        }
+                    }
+                    if user_season == seasons.outdoor{
+                        Stepper(value: $currents_points, in: 1...60) {
+                            Text("\(currents_points)")
+                        }
+                    }
                 }
             }
         }
         Spacer()
         Button(action: {
             //Some Actions
-            
+            finish_message = true
         }, label:{
             HStack{
                 Image(systemName: "stop.circle.fill")
@@ -565,6 +595,12 @@ struct simulation: View {
             }
         })
         .buttonStyle(.borderedProminent)
+        .alert(isPresented: $finish_message) {
+                Alert(
+                    title: Text("Simulation Saved"),
+                    message: Text("The simulation has been saved and can be viewed from the history, now you can exit the simulation.")
+                )
+            }
         Spacer()
     }
 }
