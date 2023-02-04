@@ -9,9 +9,31 @@ import SwiftUI
 
 struct Navigation: View {
     @AppStorage ("Navigation_hidden") var Navigation_hidden: Bool = true
-    @AppStorage ("Legal") var legal: Bool = false
-    @AppStorage ("Beta") var beta: Bool = false
+    @AppStorage ("Legal") var legal: Bool = true
+    @AppStorage ("Beta") var beta: Bool = true
+    @AppStorage ("welcome") var welcome: Bool = true
     var body: some View {
+        if welcome == true {
+            VStack{
+                Spacer()
+                Text("Ghost Archery Simulator")
+                    .font(.largeTitle)
+                Image("app_icon")
+                Spacer()
+                Button(action: {
+                    welcome = false
+                    legal = false
+                    beta = false
+                }, label: {
+                    HStack{
+                        Text("Start")
+                            .font(.title)
+                    }
+                })
+                .buttonStyle(.borderedProminent)
+                Spacer()
+            }
+        }
         //Legal Banner
         if legal == false{
             VStack{
@@ -290,55 +312,58 @@ Contact Licensor:
                         })
                         .buttonStyle(.borderedProminent)
                         Spacer()
-                        
-
                     }
                     Spacer()
                 }
             }
             else{
-                VStack {
-                    HStack{
-                        Image("banner")
-                            .resizable()
-                            .frame(width:380 ,height:100)
-                        //Reset Views
-                            .task{
-                                Navigation_hidden = true
-                            }
-                    }
-                    if Navigation_hidden == true{
-                        NavigationView(content: {Home()})
-                    }
-                    if Navigation_hidden == false{
-                        NavigationView(){
-                            List{
-                                Button(action:{Navigation_hidden=true}, label:{
-                                    HStack{
-                                        Image(systemName: "house.fill")
-                                            .foregroundColor(.yellow)
-                                        Text("Home")
-                                    }
-                                })
-                                NavigationLink(destination: Simulator()){
-                                    HStack{
-                                        Image(systemName: "figure.archery")
-                                            .foregroundColor(.blue)
-                                        Text("Simulator")
-                                    }
+                if welcome == false{
+                    VStack {
+                        HStack{
+                            Image("app_icon")
+                                .resizable()
+                                .frame(width: 80, height: 80)
+                            //Reset Views
+                                .task{
+                                    Navigation_hidden = true
                                 }
-                                NavigationLink(destination: Settings()){
-                                    HStack{
-                                        Image(systemName: "gear")
-                                            .foregroundColor(.gray)
-                                        Text("Settings")
+                            Text("Ghost Archery Simulator")
+                                .multilineTextAlignment(.center)
+                                .font(.title)
+                        }
+                        if Navigation_hidden == true{
+                            NavigationView(content: {Home()})
+                        }
+                        if Navigation_hidden == false{
+                            NavigationView(){
+                                List{
+                                    Button(action:{Navigation_hidden=true}, label:{
+                                        HStack{
+                                            Image(systemName: "house.fill")
+                                                .foregroundColor(.yellow)
+                                            Text("Home")
+                                        }
+                                    })
+                                    NavigationLink(destination: Simulator()){
+                                        HStack{
+                                            Image(systemName: "figure.archery")
+                                                .foregroundColor(.blue)
+                                            Text("Simulator")
+                                        }
+                                    }
+                                    NavigationLink(destination: Settings()){
+                                        HStack{
+                                            Image(systemName: "gear")
+                                                .foregroundColor(.gray)
+                                            Text("Settings")
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                    .padding()
                 }
-                .padding()
             }
         }
     }
@@ -363,9 +388,9 @@ struct Home: View {
             Spacer()
             }
             VStack {
-                Image("appicon")
-                Text("Welcome to Ghost Archery Simulator")
-                    .font(.title)
+                Image("banner")
+                    .resizable()
+                    .frame(height: 100)
                 Divider()
                 
             }
@@ -403,6 +428,7 @@ struct Simulator: View {
         
         if user_name == ""{
             GroupBox{
+                Spacer()
                 NavigationLink(destination: user_info()){
                     HStack{
                         Image(systemName: "gear.badge.xmark")
@@ -410,6 +436,7 @@ struct Simulator: View {
                         Text("Please, before use the simulator you need to set all the user settings.")
                     }
                 }
+                Spacer()
             }
             .task{
                 user_info_requiered = false
@@ -418,6 +445,7 @@ struct Simulator: View {
         if user_info_requiered == true{
             if user_discipline == disciplines.none{
                 GroupBox{
+                    Spacer()
                     NavigationLink(destination: user_info()){
                         HStack{
                             Image(systemName: "gear.badge.xmark")
@@ -425,6 +453,7 @@ struct Simulator: View {
                             Text("Please, before use the simulator you need to set all the user settings.")
                         }
                     }
+                    Spacer()
                 }
                 .task{
                     user_info_requiered = false
@@ -434,6 +463,7 @@ struct Simulator: View {
         if user_info_requiered == true{
             if user_season == seasons.none{
                 GroupBox{
+                    Spacer()
                     NavigationLink(destination: user_info()){
                         HStack{
                             Image(systemName: "gear.badge.xmark")
@@ -441,6 +471,7 @@ struct Simulator: View {
                             Text("Please, before use the simulator you need to set all the user settings.")
                         }
                     }
+                    Spacer()
                 }
                 .task{
                     user_info_requiered = false
@@ -516,8 +547,17 @@ struct Simulator: View {
     }
 }
 
-//Simulation
+//Random Number Generator
+func random_number_generator(){
+    //Import Points
+    @AppStorage("max_points") var max_points = 2
+    @AppStorage("min_points") var min_points = 0
+    //Number
+    @State var random_number = Int.random(in: min_points...max_points)
+}
 
+
+//Simulation
 struct simulation: View {
     //User Info
     //User Settings
@@ -544,8 +584,9 @@ struct simulation: View {
     @AppStorage("currents_points") var currents_points = 0
     //Finish Message
     @State var finish_message: Bool = false
+    //Import Number Generator
+    @State var random_number: Int = 0
     var body: some View {
-
         Text("Simulation")
             .font(.title)
         HStack{
@@ -554,6 +595,16 @@ struct simulation: View {
         }
         Text("The points needs to be entered by set")
         Spacer()
+        Button(action: {
+            //Some Actions
+            random_number_generator()
+        }, label:{
+            HStack{
+                Image(systemName: "arrowtriangle.right.square.fill")
+                    .foregroundColor(.green)
+                Text("Next")
+            }
+        })
         HStack{
             VStack{
                 Text("Ghost")
@@ -561,7 +612,7 @@ struct simulation: View {
                     .foregroundColor(.gray)
                 Divider()
                 ScrollView{
-                    Text("Random Number")
+                    Text("\(random_number)")
                 }
             }
             Divider()
@@ -751,7 +802,11 @@ struct user_info: View {
 
 struct appstorage: View {
     @State var isPresented: Bool = false
+    @State var variable_name: String = ""
+    @State var variable_type: String = ""
+    @State var new_content_variable: String = ""
     @AppStorage ("Navigation_hidden") var Navigation_hidden: Bool = true
+    @AppStorage ("appstorage_developer") var appstorage_developer: Bool = false
     var body: some View {
         HStack{
             Image(systemName: "archivebox.circle.fill")
@@ -759,27 +814,16 @@ struct appstorage: View {
             Text("App Storage")
                 .font(.title)
         }
-        GroupBox(){
-            HStack{
-                Image(systemName: "externaldrive.fill.badge.questionmark")
-                    .foregroundColor(.yellow)
-                Text("App Memory Size")
-            }
-            HStack{
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundColor(.yellow)
-                Text("Not Avaible at the moment")
-            }
-            HStack{
-                Image(systemName: "trash.circle.fill")
-                    .foregroundColor(.red)
-                Text("Remove App Storage Memory")
-            }
-            Button("Remove", role: .destructive){
-                isPresented = true
-            }
-            
-            }
+        Divider()
+        Spacer()
+        HStack{
+            Image(systemName: "trash.circle.fill")
+                .foregroundColor(.red)
+            Text("Remove App Storage Memory")
+        }
+        Button("Remove", role: .destructive){
+            isPresented = true
+        }
         .alert(isPresented: $isPresented, content: {
             Alert(title: Text("App Storage"),
                   message: Text("If you delete the App Storage Info, the Simulation History also was deleted"),
@@ -792,6 +836,40 @@ struct appstorage: View {
                     }
               })
         )})
+        Spacer()
+        GroupBox{
+            HStack{
+                Image("hammer.circle.fill")
+                    .foregroundColor(.blue)
+                Text("Developer Options (Advanced)")
+                Toggle(" ",
+                                   isOn: $appstorage_developer)
+            }
+            if appstorage_developer == true{
+                VStack{
+                    Image(systemName: "externaldrive")
+                        .foregroundColor(.brown)
+                    TextField("Enter name of variable, Only @AppStorage.", text: $variable_name)
+                    TextField("Type of variable", text: $variable_type)
+                    TextField("Enter the new content for the variable", text: $new_content_variable)
+                    Button(action: {
+                        @AppStorage ("appstorage_developer") var appstorage_developer: Bool = false
+                        variable_name = ""
+                        new_content_variable = ""
+                        variable_type = ""
+                    }, label: {
+                        HStack{
+                            Image(systemName: "doc.badge.gearshape.fill")
+                                .foregroundColor(.red)
+                            Text("Edit")
+                        }
+                    })
+                    .buttonStyle(.borderedProminent)
+                    
+                }
+            }
+        }
+        Spacer()
     }
 }
 
