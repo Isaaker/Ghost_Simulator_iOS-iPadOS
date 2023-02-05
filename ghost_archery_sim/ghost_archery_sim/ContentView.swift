@@ -372,7 +372,54 @@ Contact Licensor:
 struct Home: View {
     @AppStorage ("Navigation_hidden") var Navigation_hidden: Bool = true
     @AppStorage("user_info_banner") var user_info_banner: Bool = true
-    @AppStorage("user_info_setup") var user_info_setup: Bool = false
+    
+    //Notifications
+    
+    @State var notification_presented: Bool = false
+    @AppStorage("user_info_setup") var user_info_setup: Bool = true
+    
+    func get_notifications(){
+        //App Storage
+        
+        //User Settings
+        @AppStorage("user_name") var user_name: String = ""
+        //Discipline
+        enum disciplines: String, CaseIterable, Identifiable {
+            case compound, olympic, long_bow, traditional_recurve, bare_bow, none
+            var id: Self { self }
+        }
+        @AppStorage("user_discipline") var user_discipline: disciplines = .none
+        //Season
+        enum seasons: String, CaseIterable, Identifiable {
+            case indoor, outdoor, none
+            var id: Self { self }
+        }
+        @AppStorage("user_season") var user_season: seasons = .none
+        @State var user_info_requiered: Bool = true
+        
+        
+        //User Info Setup
+        if user_name == ""{
+            user_info_setup = false
+            notification_presented = true
+        }
+        else{
+            if user_discipline == disciplines.none{
+                user_info_setup = false
+                notification_presented = true
+            }
+            else{
+                if user_season == seasons.none{
+                    user_info_setup = false
+                    notification_presented = true
+                }
+                else{
+                    user_info_setup = false
+                    notification_presented = false
+                }
+            }
+        }
+    }
     var body: some View {
         VStack{
             HStack{
@@ -388,11 +435,55 @@ struct Home: View {
             Spacer()
             }
             VStack {
-                Image("banner")
-                    .resizable()
-                    .frame(height: 100)
+                HStack{
+                    Image(systemName: "house.fill")
+                        .foregroundColor(.yellow)
+                    Text("Home")
+                        .font(.title)
+                }
                 Divider()
-                
+                //App Notifications
+                Spacer()
+                ScrollView{
+                    HStack{
+                        Image(systemName: "bell.badge.fill")
+                            .foregroundColor(.red)
+                        Text("Notifications")
+                            .font(.title2)
+                    }
+                    Text("Pull to Refresh")
+                        .foregroundColor(.green)
+                    if notification_presented == true{
+                        Divider()
+                        Spacer()
+                        if user_info_setup == false{
+                            GroupBox{
+                                NavigationLink(destination: user_info()){
+                                    HStack{
+                                        Image(systemName: "person.fill")
+                                            .foregroundColor(.purple)
+                                        Text("Setup the User Information")
+                                            .font(.title3)
+                                    }
+                                }
+                            }
+                            Divider()
+                        }
+                        Spacer()
+                    }
+                    else{
+                        GroupBox{
+                            Image(systemName:"bell.slash.circle.fill")
+                                .foregroundColor(.brown)
+                            Text("At the moment nothing is happening around here")
+                                .font(.title3)
+                        }
+                    }
+                    Spacer()
+                }
+                .refreshable {
+                    get_notifications()
+                }
             }
             Spacer()
         }
@@ -763,6 +854,7 @@ struct user_info: View {
     }
     @AppStorage("user_season") var user_season: seasons = .none
     @AppStorage("user_notes") var user_notes: String = "Here you can take your notes, point your scopes and more..."
+    @State var notes_hidden: Bool = true
     var body: some View {
         HStack{
             Image(systemName: "person.crop.circle")
@@ -788,12 +880,25 @@ struct user_info: View {
             }
         }
         Spacer()
-        GroupBox(content: {
-            HStack{
-                Image(systemName: "note.text")
-                Text("Notes")
+        if notes_hidden == true{
+            Button(action:{
+                notes_hidden = false
+            }, label:{
+                HStack{
+                    Image(systemName: "note.text")
+                    Text("Notes")
+                }
+            })
         }
-        }){
+        if notes_hidden == false{
+            Button(action:{
+                notes_hidden = true
+            }, label:{
+                HStack{
+                    Image(systemName: "note.text")
+                    Text("Notes")
+                }
+            })
             TextEditor(text: $user_notes)
         }
         Spacer()
@@ -803,8 +908,6 @@ struct user_info: View {
 struct appstorage: View {
     @State var isPresented: Bool = false
     @State var variable_name: String = ""
-    @State var variable_type: String = ""
-    @State var new_content_variable: String = ""
     @AppStorage ("Navigation_hidden") var Navigation_hidden: Bool = true
     @AppStorage ("appstorage_developer") var appstorage_developer: Bool = false
     var body: some View {
@@ -849,19 +952,15 @@ struct appstorage: View {
                 VStack{
                     Image(systemName: "externaldrive")
                         .foregroundColor(.brown)
-                    TextField("Enter name of variable, Only @AppStorage.", text: $variable_name)
-                    TextField("Type of variable", text: $variable_type)
-                    TextField("Enter the new content for the variable", text: $new_content_variable)
+                    TextField("Enter name of variable to remove", text: $variable_name)
                     Button(action: {
                         @AppStorage ("appstorage_developer") var appstorage_developer: Bool = false
                         variable_name = ""
-                        new_content_variable = ""
-                        variable_type = ""
                     }, label: {
                         HStack{
                             Image(systemName: "doc.badge.gearshape.fill")
                                 .foregroundColor(.red)
-                            Text("Edit")
+                            Text("Remove")
                         }
                     })
                     .buttonStyle(.borderedProminent)
