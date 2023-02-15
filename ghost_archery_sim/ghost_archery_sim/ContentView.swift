@@ -1025,7 +1025,7 @@ struct LICENSE: View {
                 HStack{
                     Image(systemName: "lightbulb.fill")
                         .foregroundColor(.yellow)
-                    Text("The following license was explicitly accepted by you when you first opened the application and clicked accept on the button below the license below. As long as you have the application installed you accept the license, to reject it uninstall the application.")
+                    Text("To reject the app license uninstall the application.")
                 }
             }
             ScrollView {
@@ -1219,10 +1219,10 @@ Contact Licensor:
 - Telegram: Isaaker
 - Other methods: https://piscinadeentropia.es/contacto
 """)
-                GroupBox{
-                    Link(destination: URL(string: "https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS/blob/main/LICENSE.txt")!){
-                        Text("An online copy of the license can be found here")
-                    }
+            }
+            GroupBox{
+                Link(destination: URL(string: "https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS/blob/main/LICENSE.txt")!){
+                    Text("An online copy of the license can be found here")
                 }
             }
         }
@@ -1254,16 +1254,39 @@ struct appearance_editor: View {
                         .foregroundColor(.purple)
                     Text("System")
                 }.tag(Theme.device)
-                HStack{
-                    Image(systemName: "app")
-                        .foregroundColor(.white)
-                    Text("Light")
-                }.tag(Theme.light)
-                HStack{
-                    Image(systemName: "app")
-                        .foregroundColor(.black)
-                    Text("Dark")
-                }.tag(Theme.dark)
+                
+                //White image contrast
+                if app_theme == Theme.light{
+                    HStack{
+                        Image(systemName: "app")
+                            .foregroundColor(.gray)
+                        Text("Light")
+                    }.tag(Theme.light)
+                }
+                else{
+                    HStack{
+                        Image(systemName: "app")
+                            .foregroundColor(.white)
+                        Text("Light")
+                    }.tag(Theme.light)
+                }
+                //Black image contrast
+                
+                if app_theme == Theme.dark{
+                    HStack{
+                        Image(systemName: "app")
+                            .foregroundColor(.gray)
+                        Text("Dark")
+                    }.tag(Theme.dark)
+                }
+                else{
+                    HStack{
+                        Image(systemName: "app")
+                            .foregroundColor(.black)
+                        Text("Dark")
+                    }.tag(Theme.dark)
+                }
+                
                 }, label:{
                 HStack{
                     Image(systemName: "app")
@@ -1271,7 +1294,7 @@ struct appearance_editor: View {
                     Text("App Theme")
                 }
             })
-                .pickerStyle(.segmented)
+                .pickerStyle(.wheel)
                 .task{
                     //Set app theme
                 }

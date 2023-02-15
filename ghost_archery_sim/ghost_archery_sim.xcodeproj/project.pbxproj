@@ -11,6 +11,7 @@
 		A6D736DD2985064F006CBC71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D736DC2985064F006CBC71 /* ContentView.swift */; };
 		A6D736DF29850650006CBC71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6D736DE29850650006CBC71 /* Assets.xcassets */; };
 		A6D736E329850650006CBC71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6D736E229850650006CBC71 /* Preview Assets.xcassets */; };
+		A6E7FF69299D63050007E3B4 /* app_theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7FF68299D63050007E3B4 /* app_theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,7 @@
 		A6D736DE29850650006CBC71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6D736E029850650006CBC71 /* ghost_archery_sim.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ghost_archery_sim.entitlements; sourceTree = "<group>"; };
 		A6D736E229850650006CBC71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A6E7FF68299D63050007E3B4 /* app_theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = app_theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 		A6D736D92985064F006CBC71 /* ghost_archery_sim */ = {
 			isa = PBXGroup;
 			children = (
+				A6E7FF68299D63050007E3B4 /* app_theme.swift */,
 				A6D736DA2985064F006CBC71 /* ghost_archery_simApp.swift */,
 				A6D736DC2985064F006CBC71 /* ContentView.swift */,
 				A6D736DE29850650006CBC71 /* Assets.xcassets */,
@@ -162,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6D736DD2985064F006CBC71 /* ContentView.swift in Sources */,
+				A6E7FF69299D63050007E3B4 /* app_theme.swift in Sources */,
 				A6D736DB2985064F006CBC71 /* ghost_archery_simApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
