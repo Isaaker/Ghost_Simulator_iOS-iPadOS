@@ -943,72 +943,98 @@ struct user_info: View {
     }
 }
 
+
+//AppStorage
 struct appstorage: View {
-    @State var isPresented: Bool = false
+    @State var remove_confirmation: Bool = false
     @State var variable_name: String = ""
+    @State var removed: Bool = false
     @AppStorage ("Navigation_hidden") var Navigation_hidden: Bool = true
     @AppStorage ("appstorage_developer") var appstorage_developer: Bool = false
     var body: some View {
-        HStack{
-            Image(systemName: "archivebox.circle.fill")
-                .foregroundColor(.yellow)
-            Text("App Storage")
-                .font(.title)
-        }
-        Divider()
-        Spacer()
-        HStack{
-            Image(systemName: "trash.circle.fill")
-                .foregroundColor(.red)
-            Text("Remove App Storage Memory")
-        }
-        Button("Remove", role: .destructive){
-            isPresented = true
-        }
-        .alert(isPresented: $isPresented, content: {
-            Alert(title: Text("App Storage"),
-                  message: Text("If you delete the App Storage Info, the Simulation History also was deleted"),
-                  primaryButton: Alert.Button.default(Text("Cancel"), action: {
-                isPresented = false
-            }), secondaryButton:
-                    Alert.Button.destructive(Text("Continue"), action: {if let bundleID = Bundle.main.bundleIdentifier {
-                        UserDefaults.standard.removePersistentDomain(forName: bundleID)
-                        Navigation_hidden=true
-                    }
-              })
-        )})
-        Spacer()
-        GroupBox{
+        if remove_confirmation == false{
             HStack{
-                Image("hammer.circle.fill")
-                    .foregroundColor(.blue)
-                Text("Developer Options (Advanced)")
-                Toggle(" ",
-                                   isOn: $appstorage_developer)
+                Image(systemName: "archivebox.circle.fill")
+                    .foregroundColor(.yellow)
+                Text("App Storage")
+                    .font(.title)
             }
-            if appstorage_developer == true{
-                VStack{
-                    Image(systemName: "externaldrive")
-                        .foregroundColor(.brown)
-                    TextField("Enter name of variable to remove", text: $variable_name)
-                    Button(action: {
-                        @AppStorage ("appstorage_developer") var appstorage_developer: Bool = false
-                        variable_name = ""
-                    }, label: {
-                        HStack{
-                            Image(systemName: "doc.badge.gearshape.fill")
-                                .foregroundColor(.red)
-                            Text("Remove")
+            Divider()
+            Spacer()
+            HStack{
+                Image(systemName: "trash.circle.fill")
+                    .foregroundColor(.red)
+                Text("Remove App Storage Memory")
+            }
+            Button("Remove", role: .destructive){
+                remove_confirmation = true
+            }
+            Spacer()
+            /*GroupBox{
+                HStack{
+                    Image("hammer.circle.fill")
+                        .foregroundColor(.blue)
+                    Text("Developer Options (Advanced)")
+                    Toggle(" ",
+                                       isOn: $appstorage_developer)
+                }
+                if appstorage_developer == true{
+                    VStack{
+                        Image(systemName: "externaldrive")
+                            .foregroundColor(.brown)
+                        TextField("Enter name of variable to remove", text: $variable_name)
+                        Button(action: {
+                            @AppStorage ("appstorage_developer") var appstorage_developer: Bool = false
+                            variable_name = ""
+                        }, label: {
+                            HStack{
+                                Image(systemName: "doc.badge.gearshape.fill")
+                                    .foregroundColor(.red)
+                                Text("Remove")
+                            }
+                        })
+                        .buttonStyle(.borderedProminent)
+                        
+                    }
+                }
+            }
+            */
+        }
+        if remove_confirmation == true{
+            
+            VStack{
+                Spacer()
+                Text("Press and hold 10 seconds the center button to confirm the deletion")
+                    .font(.title)
+                    .foregroundColor(.red)
+                    .multilineTextAlignment(.center)
+                Spacer()
+                Image(systemName: "trash.circle.fill")
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.red)
+                    .onLongPressGesture(minimumDuration: 10, perform:{
+                        if let bundleID = Bundle.main.bundleIdentifier {
+                            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+                        removed = true
                         }
                     })
-                    .buttonStyle(.borderedProminent)
-                    
-                }
+                    .alert("App Storage Sucesfully Removed", isPresented: $removed) {
+                        Button("OK", role: .cancel, action:{
+                            removed = false
+                        })
+                    }
+                Spacer()
+                Text("Deleting the storage deletes all the information in the application, including the history")
+                    .multilineTextAlignment(.center)
+                Spacer()
             }
         }
         Spacer()
     }
 }
+//Confirm Remove AppStorage
+
 
 
 //App License
