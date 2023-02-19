@@ -351,6 +351,20 @@ Contact Licensor:
                                             Text("Simulator")
                                         }
                                     }
+                                    NavigationLink(destination: History()){
+                                        HStack{
+                                            Image(systemName: "calendar.badge.clock")
+                                                .foregroundColor(.brown)
+                                            Text("History")
+                                        }
+                                    }
+                                    NavigationLink(destination: counter()){
+                                        HStack{
+                                            Image(systemName: "numbersign")
+                                                .foregroundColor(.green)
+                                            Text("Counter")
+                                        }
+                                    }
                                     NavigationLink(destination: Settings()){
                                         HStack{
                                             Image(systemName: "gear")
@@ -768,115 +782,66 @@ struct History: View {
 }
 
 
-
-
-
-//Settings
-
-struct Settings: View {
-    var body: some View {
-        HStack {
-            Image(systemName: "gear")
-            Text("Settings")
-                .font(.title)
-        }
-        List{
-            NavigationLink(destination: user_info()){
-                HStack{
-                    Image(systemName: "figure.archery")
-                        .foregroundColor(.green)
-                    Text("User Info")
-                }
-            }
-            NavigationLink(destination: app_info()){
-                HStack{
-                    Image(systemName: "info.circle.fill")
-                        .foregroundColor(.blue)
-                    Text("About")
-                }
-            }
-            NavigationLink(destination: appstorage()){
-                HStack{
-                    Image(systemName: "archivebox.circle.fill")
-                        .foregroundColor(.yellow)
-                    Text("App Storage")
-                }
-            }
-            NavigationLink(destination: appearance_editor()){
-                HStack{
-                    Image(systemName: "paintbrush.fill")
-                        .foregroundColor(.purple)
-                    Text("Appearance")
-                }
-            }
-            NavigationLink(destination: LICENSE()){
-                HStack{
-                    Image(systemName: "list.bullet.rectangle.portrait.fill")
-                        .foregroundColor(.red)
-                    Text("License")
-                }
-            }
-        }
-    }
-}
-
-//Settings Sub Menu
-struct app_info: View {
-    //App Version
-    func getVersion() -> String {
-        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-            return "ERROR: No Version Info Provied"
-        }
-        return version
-    }
+//Counter
+struct counter: View {
+    @AppStorage("arrow_counter") var arrow_counter: Int = 0
+    @State var advanced_editing: Bool = false
     var body: some View {
         HStack{
-            Image(systemName: "info.circle.fill")
+            Image(systemName: "numbersign")
                 .foregroundColor(.blue)
-            Text("About the App")
+            Text("Counter")
                 .font(.title)
         }
-        List{
-            HStack{
-                Text("App Version:")
-                Text(getVersion())
+        Spacer()
+        Text("\(arrow_counter)")
+            .font(.largeTitle)
+        Spacer()
+        Image(systemName: "plus.circle.fill")
+            .resizable()
+            .frame(width: 50,height: 50)
+            .foregroundColor(.green)
+            .onTapGesture {
+                arrow_counter += 1
             }
-            HStack{
-                Text("Code Source:")
-                Link(destination: URL(string: "https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS")!){
-                    Text("GitHub")
-                }
-            }
-            HStack{
-                Image(systemName: "hammer.fill")
-                    .foregroundColor(.blue)
-                Text("Developed by:")
-                Link("Isaaker",destination: URL(string: "https://github.com/Isaaker")!)
-            }
-            HStack{
-                Image(systemName: "swift")
-                    .foregroundColor(.red)
-                Text("Works with:")
-                Link("Swift",destination: URL(string: "https://www.swift.org")!)
-
-            }
-            HStack{
-                Image(systemName: "scribble.variable")
-                    .foregroundColor(.pink)
-                Text("Drawed by:")
-                Link("Erica Hernán",destination: URL(string: "https://www.instagram.com/eri.hernan_art/")!)
-            }
-            HStack{
-                Image(systemName: "person.3.fill")
+        Spacer()
+        HStack{
+            Button(action:{
+                arrow_counter = 0
+            }, label:{
+                Image(systemName: "arrow.counterclockwise.circle.fill")
                     .foregroundColor(.yellow)
-                Text("Special Thanks:")
-                Link("Antonio Hernán",destination: URL(string: "https://github.com/antoniohernan")!)
-
+                Text("Reset")
+            })
+            .buttonStyle(.borderedProminent)
+            Button(action:{
+                advanced_editing = true
+            }, label:{
+                Image(systemName: "plusminus.circle")
+                    .foregroundColor(.brown)
+                Text("Advanced Edition")
+            })
+            .buttonStyle(.borderedProminent)
+            .popover(isPresented: $advanced_editing) {
+                Spacer()
+                Stepper(value: $arrow_counter, in: 0...arrow_counter + 1) {
+                    Text("Arrows: \(arrow_counter)")
+                }
+                Spacer()
+                Button("Close"){
+                    advanced_editing = false
+                }
+                .buttonStyle(.borderedProminent)
+                Spacer()
             }
         }
+        Spacer()
     }
 }
 
+
+
+//Settings Sub Menu
 struct user_info: View {
     @AppStorage("user_name") var user_name: String = ""
     //Discipline
@@ -1033,12 +998,121 @@ struct appstorage: View {
         Spacer()
     }
 }
-//Confirm Remove AppStorage
 
+
+
+
+
+
+
+//Settings
+
+struct Settings: View {
+    var body: some View {
+        HStack {
+            Image(systemName: "gear")
+            Text("Settings")
+                .font(.title)
+        }
+        List{
+            NavigationLink(destination: user_info()){
+                HStack{
+                    Image(systemName: "figure.archery")
+                        .foregroundColor(.green)
+                    Text("User Info")
+                }
+            }
+            NavigationLink(destination: app_info()){
+                HStack{
+                    Image(systemName: "info.circle.fill")
+                        .foregroundColor(.blue)
+                    Text("About")
+                }
+            }
+            NavigationLink(destination: appstorage()){
+                HStack{
+                    Image(systemName: "archivebox.circle.fill")
+                        .foregroundColor(.yellow)
+                    Text("App Storage")
+                }
+            }
+            NavigationLink(destination: appearance_editor()){
+                HStack{
+                    Image(systemName: "paintbrush.fill")
+                        .foregroundColor(.purple)
+                    Text("Appearance")
+                }
+            }
+            NavigationLink(destination: LICENSE()){
+                HStack{
+                    Image(systemName: "list.bullet.rectangle.portrait.fill")
+                        .foregroundColor(.red)
+                    Text("License")
+                }
+            }
+        }
+    }
+}
+
+//Settings Sub Menu
+struct app_info: View {
+    //App Version
+    func getVersion() -> String {
+        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return "ERROR: No Version Info Provied"
+        }
+        return version
+    }
+    var body: some View {
+        HStack{
+            Image(systemName: "info.circle.fill")
+                .foregroundColor(.blue)
+            Text("About the App")
+                .font(.title)
+        }
+        List{
+            HStack{
+                Text("App Version:")
+                Text(getVersion())
+            }
+            HStack{
+                Text("Code Source:")
+                Link(destination: URL(string: "https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS")!){
+                    Text("GitHub")
+                }
+            }
+            HStack{
+                Image(systemName: "hammer.fill")
+                    .foregroundColor(.blue)
+                Text("Developed by:")
+                Link("Isaaker",destination: URL(string: "https://github.com/Isaaker")!)
+            }
+            HStack{
+                Image(systemName: "swift")
+                    .foregroundColor(.red)
+                Text("Works with:")
+                Link("Swift",destination: URL(string: "https://www.swift.org")!)
+
+            }
+            HStack{
+                Image(systemName: "scribble.variable")
+                    .foregroundColor(.pink)
+                Text("Drawed by:")
+                Link("Erica Hernán",destination: URL(string: "https://www.instagram.com/eri.hernan_art/")!)
+            }
+            HStack{
+                Image(systemName: "person.3.fill")
+                    .foregroundColor(.yellow)
+                Text("Special Thanks:")
+                Link("Antonio Hernán",destination: URL(string: "https://github.com/antoniohernan")!)
+
+            }
+        }
+    }
+}
 
 
 //App License
-//History
 struct LICENSE: View {
     var body: some View {
         VStack{
