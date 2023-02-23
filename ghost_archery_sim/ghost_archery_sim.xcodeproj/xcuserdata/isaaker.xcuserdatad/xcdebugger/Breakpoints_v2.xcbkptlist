@@ -30,10 +30,58 @@
             filePath = "ghost_archery_sim/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "799"
-            endingLineNumber = "799"
+            startingLineNumber = "888"
+            endingLineNumber = "888"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BFDDB564-B20A-4A5B-8179-59303DC11F3B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ghost_archery_sim/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "933"
+            endingLineNumber = "933"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "BFDDB564-B20A-4A5B-8179-59303DC11F3B - 97d819ed2522d10b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ghost_archery_sim.Equipment.init() -&gt; ghost_archery_sim.Equipment"
+                  moduleName = "ghost_archery_sim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaaker/Desarrollador/GitHub/Ghost_Simulator_iOS-iPadOS/ghost_archery_sim/ghost_archery_sim/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "934"
+                  endingLineNumber = "934"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "BFDDB564-B20A-4A5B-8179-59303DC11F3B - 910cb181a7e4051f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ghost_archery_sim.Equipment.init(equipment_mode: Swift.String) -&gt; ghost_archery_sim.Equipment"
+                  moduleName = "ghost_archery_sim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isaaker/Desarrollador/GitHub/Ghost_Simulator_iOS-iPadOS/ghost_archery_sim/ghost_archery_sim/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "8">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
