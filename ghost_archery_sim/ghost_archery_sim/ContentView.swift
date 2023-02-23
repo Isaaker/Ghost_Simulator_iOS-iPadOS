@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Navigation: View {
-    @AppStorage ("Navigation_hidden") var Navigation_hidden: Bool = true
+    @AppStorage ("Navigation_hidden") var current_window: String = ("Home")
     @AppStorage ("Legal") var legal: Bool = true
     @AppStorage ("Beta") var beta: Bool = true
     @AppStorage ("welcome") var welcome: Bool = true
@@ -324,17 +324,110 @@ Contact Licensor:
                                 .resizable()
                                 .frame(width: 80, height: 80)
                             //Reset Views
-                                .task{
-                                    Navigation_hidden = true
-                                }
                             Text("Ghost Archery Simulator")
                                 .multilineTextAlignment(.center)
                                 .font(.title)
                         }
-                        if Navigation_hidden == true{
-                            NavigationView(content: {Home()})
+                        if current_window == "Home"{
+                            NavigationStack(root: {Home()})
                         }
-                        if Navigation_hidden == false{
+                        if current_window == "Simulator"{
+                            NavigationStack(root: {Simulator()})
+                        }
+                        if current_window == "History"{
+                            NavigationStack(root: {History()})
+                        }
+                        if current_window == "Counter"{
+                            NavigationStack(root: {counter()})
+                        }
+                        if current_window == "Equipment"{
+                            NavigationStack(root: {Equipment()})
+                        }
+                        if current_window == "Settings"{
+                            NavigationStack(root: {Settings()})
+                        }
+                        Divider()
+                        HStack{
+                            //Home
+                            if current_window == "Home"{
+                                VStack{
+                                    Image(systemName: "house.fill")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.blue)
+                                    Text("Home")
+                                        .foregroundColor(.blue)
+                                }
+                                .onTapGesture {
+                                    current_window = "Home"
+                                }
+                            }
+                            else{
+                                VStack{
+                                    Image(systemName: "house.fill")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    Text("Home")
+                                }
+                                .onTapGesture {
+                                    current_window = "Home"
+                                }
+                            }
+                            
+                            //Simulator
+                            if current_window == "Simulator"{
+                                VStack{
+                                    Image(systemName: "figure.archery")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.blue)
+                                    Text("Simulator")
+                                        .foregroundColor(.blue)
+                                }
+                                .onTapGesture {
+                                    current_window = "Simulator"
+                                }
+                            }
+                            else{
+                                VStack{
+                                    Image(systemName: "figure.archery")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    Text("Simulator")
+                                }
+                                .onTapGesture {
+                                    current_window = "Simulator"
+                                }
+                            }
+                            
+                            //Settings
+                            if current_window == "Settings"{
+                                VStack{
+                                    Image(systemName: "gear")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.blue)
+                                    Text("Settings")
+                                        .foregroundColor(.blue)
+                                }
+                                .onTapGesture {
+                                    current_window = "Settings"
+                                }
+                            }
+                            else{
+                                VStack{
+                                    Image(systemName: "gear")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    Text("Settings")
+                                }
+                                .onTapGesture {
+                                    current_window = "Settings"
+                                }
+                            }
+                            
+                        }
+                        /*if Navigation_hidden == false{
                             NavigationView(){
                                 List{
                                     Button(action:{Navigation_hidden=true}, label:{
@@ -365,6 +458,13 @@ Contact Licensor:
                                             Text("Counter")
                                         }
                                     }
+                                    NavigationLink(destination: Equipment()){
+                                        HStack{
+                                            Image(systemName: "slider.horizontal.3")
+                                                .foregroundColor(.purple)
+                                            Text("Equipment")
+                                        }
+                                    }
                                     NavigationLink(destination: Settings()){
                                         HStack{
                                             Image(systemName: "gear")
@@ -374,7 +474,7 @@ Contact Licensor:
                                     }
                                 }
                             }
-                        }
+                        }*/
                     }
                     .padding()
                 }
@@ -436,18 +536,7 @@ struct Home: View {
     }
     var body: some View {
         VStack{
-            HStack{
-                Button(action: {
-                    Navigation_hidden = false
-                },label:{
-                    HStack{
-                        Image(systemName: "filemenu.and.selection")
-                            .foregroundColor(.blue)
-                        Text("Menu")
-                    }
-                })
             Spacer()
-            }
             VStack {
                 HStack{
                     Image(systemName: "house.fill")
@@ -799,7 +888,7 @@ struct counter: View {
         Spacer()
         Image(systemName: "plus.circle.fill")
             .resizable()
-            .frame(width: 50,height: 50)
+            .frame(width: 80,height: 80)
             .foregroundColor(.green)
             .onTapGesture {
                 arrow_counter += 1
@@ -836,6 +925,67 @@ struct counter: View {
             }
         }
         Spacer()
+    }
+}
+
+
+//Counter
+struct Equipment: View {
+    @State var equipment_mode: String = "bows"
+    var body: some View {
+        HStack{
+            Image(systemName: "slider.horizontal.3")
+                .foregroundColor(.purple)
+            Text("Equipment")
+                .font(.title)
+        }
+        Spacer()
+        GroupBox{
+            HStack{
+                Image(systemName: "lightbulb.fill")
+                    .foregroundColor(.yellow)
+                Text("Here you can write down the configuration of your bows, arrows and other equipment...")
+            }
+        }
+        Spacer()
+        if  equipment_mode == "bows"{
+            //Bows Mode
+            Text("")
+                .font(.title2)
+            List{
+                HStack{
+                    Text("Bow 1")
+                }
+                .onTapGesture {
+                    equipment_mode = "Bow 1"
+                }
+                
+            }
+            .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
+                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Content@*/Text("Content")/*@END_MENU_TOKEN@*/
+            }
+        }
+        else{
+            Text (equipment_mode)
+            //Info bow selected
+            
+        }
+        Spacer()
+        Divider()
+        HStack{
+            //Icon Bow
+            Image(systemName: "figure.archery")
+                .onTapGesture {
+                    equipment_mode = "bows"
+                }
+            //Icon Arrow
+            //Icon others
+            Image(systemName: "circle.grid.3x3")
+                .onTapGesture {
+                    equipment_mode = "others"
+                }
+            Spacer()
+        }
     }
 }
 
