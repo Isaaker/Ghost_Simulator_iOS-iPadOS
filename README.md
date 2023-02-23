@@ -31,7 +31,7 @@ The application is not available for download from the App Store, but can be ins
 
 4. Connect with a cable your device to the Mac with Xcode
 
-5. Connect with a cable your device to the Mac with Xcode
+5. Make sure you have trusted the device if you are connecting it to that Mac for the first time
 
 6. Go to the project root (the master file) and open Singing & Capabilities Menu
 
