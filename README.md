@@ -84,5 +84,3 @@ Then there are two ways to proceed:
 [With Xcode]()
 
 [With .IPA / Xcode]()
-
-[With .IPA / Apple Configurator]()
