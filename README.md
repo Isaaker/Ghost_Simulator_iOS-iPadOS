@@ -78,9 +78,3 @@ Then there are two ways to proceed:
 
 #### Apple Configurator
 **Not Avaible**
-
-### Installation videos
-
-[With Xcode]()
-
-[With .IPA / Xcode]()
