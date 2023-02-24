@@ -8,7 +8,7 @@
 | Category | Status | Run on: |
 | -- | -- | -- |
 |Security|[![Semgrep](https://github.com/Isaaker/Ghost_Simulator_ES/actions/workflows/semgrep.yml/badge.svg)](https://github.com/Isaaker/Ghost_Simulator_ES/actions/workflows/semgrep.yml)| Commit and Pull Request|
-|Testing|---|Out Of Service|
+|Testing|[![iOS Testing Workflow](https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS/actions/workflows/ios_test.yml/badge.svg?branch=main)](https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS/actions/workflows/ios_test.yml)|Pull Request and Releases|
 
 
 ## Compatibility
