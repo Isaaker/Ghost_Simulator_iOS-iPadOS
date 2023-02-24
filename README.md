@@ -41,6 +41,34 @@ The application is not available for download from the App Store, but can be ins
 
 9. When the application already exits the device, press the stop button, close Xcode and disconnect the device
 
-10. Now the app is installed!!!
+10. You now have the application installed but you will need to authorize the application developer for the application to run. You can do this from Settings > General > VPN and device management > Developer's app
+
+11. Now the app works!!!
 
 If you need help, you can reed [this article](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device)
+
+### Using .IPA file
+
+1. Go to the latest App Relase
+
+2. Download to your Mac the .IPA file
+
+Then there are two ways to proceed:
+
+#### Xcode
+
+3. Connect with a cable your device to the Mac with Xcode
+
+4. Make sure you have trusted the device if you are connecting it to that Mac for the first time
+
+5. Go to Window > Devices and Simulator (May. + Command + 2) > Devices
+
+6. Choose your device
+
+7. On Installed Apps add new app and choose the App .IPA from your computer
+
+8. You now have the application installed but you will need to authorize the application developer for the application to run. You can do this from Settings > General > VPN and device management > Developer's app
+
+9. Now the app works!!!
+
+#### Apple Configurator
