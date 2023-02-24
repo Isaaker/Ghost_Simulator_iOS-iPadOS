@@ -400,6 +400,32 @@ Contact Licensor:
                                 }
                             }
                             
+                            //History
+                            if current_window == "History"{
+                                VStack{
+                                    Image(systemName: "calendar.badge.clock")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.blue)
+                                    Text("History")
+                                        .foregroundColor(.blue)
+                                }
+                                .onTapGesture {
+                                    current_window = "History"
+                                }
+                            }
+                            else{
+                                VStack{
+                                    Image(systemName: "calendar.badge.clock")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    Text("History")
+                                }
+                                .onTapGesture {
+                                    current_window = "History"
+                                }
+                            }
+                            
                             //Settings
                             if current_window == "Settings"{
                                 VStack{
