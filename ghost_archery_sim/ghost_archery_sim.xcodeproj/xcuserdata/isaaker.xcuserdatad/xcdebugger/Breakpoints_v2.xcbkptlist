@@ -30,8 +30,8 @@
             filePath = "ghost_archery_sim/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "888"
-            endingLineNumber = "888"
+            startingLineNumber = "914"
+            endingLineNumber = "914"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -46,10 +46,10 @@
             filePath = "ghost_archery_sim/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "933"
-            endingLineNumber = "933"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "959"
+            endingLineNumber = "959"
+            landmarkName = "body"
+            landmarkType = "24">
             <Locations>
                <Location
                   uuid = "BFDDB564-B20A-4A5B-8179-59303DC11F3B - 97d819ed2522d10b"
