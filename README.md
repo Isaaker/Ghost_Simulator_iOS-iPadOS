@@ -72,3 +72,13 @@ Then there are two ways to proceed:
 9. Now the app works!!!
 
 #### Apple Configurator
+**This method does not require developer mode to be activated**
+**WARNING: Make sure you have the latest version of OS**
+
+### Installation videos
+
+[With Xcode]()
+
+[With .IPA / Xcode]()
+
+[With .IPA / Apple Configurator]()
