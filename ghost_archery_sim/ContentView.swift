@@ -337,11 +337,8 @@ Contact Licensor:
                         if current_window == "History"{
                             NavigationStack(root: {History()})
                         }
-                        if current_window == "Counter"{
-                            NavigationStack(root: {counter()})
-                        }
-                        if current_window == "Equipment"{
-                            NavigationStack(root: {Equipment()})
+                        if current_window == "Utilities"{
+                            NavigationStack(root: {Utilities()})
                         }
                         if current_window == "Settings"{
                             NavigationStack(root: {Settings()})
@@ -426,6 +423,32 @@ Contact Licensor:
                                 }
                             }
                             
+                            //utilities
+                            if current_window == "Utilities"{
+                                VStack{
+                                    Image(systemName: "screwdriver.fill")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.blue)
+                                    Text("Utilities")
+                                        .foregroundColor(.blue)
+                                }
+                                .onTapGesture {
+                                    current_window = "Utilities"
+                                }
+                            }
+                            else{
+                                VStack{
+                                    Image(systemName: "screwdriver.fill")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    Text("Utilities")
+                                }
+                                .onTapGesture {
+                                    current_window = "Utilities"
+                                }
+                            }
+                            
                             //Settings
                             if current_window == "Settings"{
                                 VStack{
@@ -453,54 +476,6 @@ Contact Licensor:
                             }
                             
                         }
-                        /*if Navigation_hidden == false{
-                            NavigationView(){
-                                List{
-                                    Button(action:{Navigation_hidden=true}, label:{
-                                        HStack{
-                                            Image(systemName: "house.fill")
-                                                .foregroundColor(.yellow)
-                                            Text("Home")
-                                        }
-                                    })
-                                    NavigationLink(destination: Simulator()){
-                                        HStack{
-                                            Image(systemName: "figure.archery")
-                                                .foregroundColor(.blue)
-                                            Text("Simulator")
-                                        }
-                                    }
-                                    NavigationLink(destination: History()){
-                                        HStack{
-                                            Image(systemName: "calendar.badge.clock")
-                                                .foregroundColor(.brown)
-                                            Text("History")
-                                        }
-                                    }
-                                    NavigationLink(destination: counter()){
-                                        HStack{
-                                            Image(systemName: "numbersign")
-                                                .foregroundColor(.green)
-                                            Text("Counter")
-                                        }
-                                    }
-                                    NavigationLink(destination: Equipment()){
-                                        HStack{
-                                            Image(systemName: "slider.horizontal.3")
-                                                .foregroundColor(.purple)
-                                            Text("Equipment")
-                                        }
-                                    }
-                                    NavigationLink(destination: Settings()){
-                                        HStack{
-                                            Image(systemName: "gear")
-                                                .foregroundColor(.gray)
-                                            Text("Settings")
-                                        }
-                                    }
-                                }
-                            }
-                        }*/
                     }
                     .padding()
                 }
@@ -662,7 +637,7 @@ struct Simulator: View {
                 user_info_requiered = false
             }
         }
-        if user_info_requiered == true{
+        else{
             if user_discipline == disciplines.none{
                 GroupBox{
                     Spacer()
@@ -679,22 +654,22 @@ struct Simulator: View {
                     user_info_requiered = false
                 }
             }
-        }
-        if user_info_requiered == true{
-            if user_season == seasons.none{
-                GroupBox{
-                    Spacer()
-                    NavigationLink(destination: user_info()){
-                        HStack{
-                            Image(systemName: "gear.badge.xmark")
-                                .foregroundColor(.red)
-                            Text("Please, before use the simulator you need to set all the user settings.")
+            else{
+                if user_season == seasons.none{
+                    GroupBox{
+                        Spacer()
+                        NavigationLink(destination: user_info()){
+                            HStack{
+                                Image(systemName: "gear.badge.xmark")
+                                    .foregroundColor(.red)
+                                Text("Please, before use the simulator you need to set all the user settings.")
+                            }
                         }
+                        Spacer()
                     }
-                    Spacer()
-                }
-                .task{
-                    user_info_requiered = false
+                    .task{
+                        user_info_requiered = false
+                    }
                 }
             }
         }
@@ -767,13 +742,11 @@ struct Simulator: View {
     }
 }
 
-//Random Number Generator
-func random_number_generator(){
-    //Import Points
-    @AppStorage("max_points") var max_points = 2
-    @AppStorage("min_points") var min_points = 0
-    //Number
-    @State var random_number = Int.random(in: min_points...max_points)
+//Points Table
+struct set_info: Identifiable {
+    let ghost_points: Int
+    let your_points: Int
+    let id = UUID()
 }
 
 
@@ -800,12 +773,15 @@ struct simulation: View {
     //Points
     @AppStorage("max_points") var max_points = 2
     @AppStorage("min_points") var min_points = 0
-    //Points Storage
-    @AppStorage("currents_points") var currents_points = 0
     //Finish Message
     @State var finish_message: Bool = false
-    //Import Number Generator
-    @State var random_number: Int = 0
+
+    
+    //Table
+    //Indoor
+    
+                 
+    
     var body: some View {
         Text("Simulation")
             .font(.title)
@@ -815,44 +791,24 @@ struct simulation: View {
         }
         Text("The points needs to be entered by set")
         Spacer()
-        Button(action: {
-            //Some Actions
-            random_number_generator()
-        }, label:{
-            HStack{
-                Image(systemName: "arrowtriangle.right.square.fill")
-                    .foregroundColor(.green)
-                Text("Next")
-            }
-        })
         HStack{
             VStack{
                 Text("Ghost")
                     .font(.title2)
                     .foregroundColor(.gray)
                 Divider()
-                ScrollView{
-                    Text("\(random_number)")
-                }
             }
             Divider()
             VStack{
-                Text("You")
-                    .font(.title2)
-                    .foregroundColor(.blue)
-                Divider()
-                ScrollView{
-                    if user_season == seasons.indoor{
-                        Stepper(value: $currents_points, in: 1...30) {
-                            Text("Points in this set: \(currents_points)")
-                        }
-                    }
-                    if user_season == seasons.outdoor{
-                        Stepper(value: $currents_points, in: 1...60) {
-                            Text("\(currents_points)")
-                        }
-                    }
+                Form {
+                Section(header: Text("Ghost")) {
+                    
                 }
+                Section(header: Text("You")) {
+                    
+                }
+                
+                
             }
         }
         Spacer()
@@ -896,6 +852,36 @@ struct History: View {
     }
 }
 
+//Utilities
+struct Utilities: View {
+    var body: some View {
+        VStack{
+            HStack{
+                Image(systemName: "screwdriver.fill")
+                Text("Utilities")
+                    .font(.title)
+            }
+            List{
+                NavigationLink(destination: counter()){
+                    HStack{
+                        Image(systemName: "numbersign")
+                            .foregroundColor(.blue)
+                        Text("Counter")
+                    }
+                }
+                NavigationLink(destination: Equipment()){
+                    HStack{
+                        Image(systemName: "slider.horizontal.3")
+                            .foregroundColor(.purple)
+                        Text("Equipment")
+                    }
+                }
+            }
+        }
+    }
+}
+
+//Sub Menu Utilities
 
 //Counter
 struct counter: View {
@@ -957,7 +943,19 @@ struct counter: View {
 
 //Counter
 struct Equipment: View {
-    @State var equipment_mode: String = "bows"
+    // Bow
+    @AppStorage("bow_name") var bow_name: String = "Bow Name"
+    @AppStorage("bow_type") var bow_type: String = ""
+    enum bow_types: String, CaseIterable, Identifiable {
+        case compound, olympic, long_bow, traditional_recurve, bare_bow, none
+        var id: Self { self }
+    }
+    @AppStorage("bow_brand") var bow_brand: String = ""
+    enum bow_brands: String, CaseIterable, Identifiable {
+        case none, Alpine, Apa, Athens, Bear, Booster, Bowtech, Browning, Caesar, Diamond, Elite, Firefox, Fuse, Gearhead, Genesis, Genx, Hca, Hoyt, Junxing, Kinetic_Core, Maitland, ManKung_Drake, Martin, Mathews, Merline_Mybo, Mission, Moxie, Obsession, Pearson, Perfect_Line, Poelang, Prime, PSE, Quest, Rolan, Sanlida, Solognac, Strother, Topoint, Velocity, Whisper_Creek, Win_Win_Black, Xpedition
+        var id: Self { self }
+    }
+    @State var edit_bow_name: Bool = false
     var body: some View {
         HStack{
             Image(systemName: "slider.horizontal.3")
@@ -970,47 +968,51 @@ struct Equipment: View {
             HStack{
                 Image(systemName: "lightbulb.fill")
                     .foregroundColor(.yellow)
-                Text("Here you can write down the configuration of your bows, arrows and other equipment...")
+                Text("Here you can write down the configuration of your bow, arrows...")
             }
         }
-        Spacer()
-        if  equipment_mode == "bows"{
-            //Bows Mode
-            Text("")
-                .font(.title2)
-            List{
-                HStack{
-                    Text("Bow 1")
+        ScrollView{
+            HStack{
+                if edit_bow_name == false{
+                    Image(systemName: "figure.archery")
+                    Text(bow_name)
+                        .font(.title3)
+                        .onTapGesture{
+                            edit_bow_name = true
+                        }
                 }
-                .onTapGesture {
-                    equipment_mode = "Bow 1"
+                if edit_bow_name == true{
+                    TextField("Bow Name", text: $bow_name)
+                    Button("Done"){
+                        edit_bow_name = false
+                    }
+                }
+            }
+            Divider()
+            VStack{
+                Picker(selection: $bow_type, label: Text("Bow Type")) {
+                    Text("None").tag(bow_types.none)
+                    Text("Compound").tag(bow_types.compound)
+                    Text("Olympic").tag(bow_types.olympic)
+                    Text("Long Bow").tag(bow_types.long_bow)
+                    Text("Traditional Recurve").tag(bow_types.traditional_recurve)
+                    Text("Bare-Bow").tag(bow_types.bare_bow)
+                }
+                
+                //Bow Brands
+                
+                //Compound
+                if bow_type == bow_types.compound.rawValue{
+                    Picker(selection: $bow_brand, label: Text("Bow Brand")) {
+                        Text("None").tag(bow_brands.none)
+                        Text("Alpine").tag(bow_brands.Alpine)
+                        Text("Apa").tag(bow_brands.Apa)
+                        Text("Athens").tag(bow_brands.Athens)
+                        Text("Bear").tag(bow_brands.Bear)
+                    }
                 }
                 
             }
-            .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/, allowsFullSwipe: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
-                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Content@*/Text("Content")/*@END_MENU_TOKEN@*/
-            }
-        }
-        else{
-            Text (equipment_mode)
-            //Info bow selected
-            
-        }
-        Spacer()
-        Divider()
-        HStack{
-            //Icon Bow
-            Image(systemName: "figure.archery")
-                .onTapGesture {
-                    equipment_mode = "bows"
-                }
-            //Icon Arrow
-            //Icon others
-            Image(systemName: "circle.grid.3x3")
-                .onTapGesture {
-                    equipment_mode = "others"
-                }
-            Spacer()
         }
     }
 }
@@ -1142,7 +1144,6 @@ struct appstorage: View {
             */
         }
         if remove_confirmation == true{
-            
             VStack{
                 Spacer()
                 Text("Press and hold 10 seconds the center button to confirm the deletion")
@@ -1255,6 +1256,18 @@ struct app_info: View {
                 Text("Code Source:")
                 Link(destination: URL(string: "https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS")!){
                     Text("GitHub")
+                }
+            }
+            HStack{
+                Link(destination: URL(string: "https://isaaker.github.io/archerysimulator")!){
+                    Text("Official Web Page")
+                }
+            }
+            HStack{
+                Link(destination: URL(string: "https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS/issues/new/choose")!){
+                    Image(systemName: "exclamationmark.octagon.fill")
+                        .foregroundColor(.red)
+                    Text("Report Error")
                 }
             }
             HStack{
