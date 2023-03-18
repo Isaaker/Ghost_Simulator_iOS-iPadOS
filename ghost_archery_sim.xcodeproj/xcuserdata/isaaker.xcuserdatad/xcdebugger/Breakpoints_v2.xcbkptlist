@@ -30,8 +30,8 @@
             filePath = "ghost_archery_sim/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "903"
-            endingLineNumber = "903"
+            startingLineNumber = "913"
+            endingLineNumber = "913"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -46,13 +46,13 @@
             filePath = "ghost_archery_sim/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "948"
-            endingLineNumber = "948"
+            startingLineNumber = "966"
+            endingLineNumber = "966"
             landmarkName = "unknown"
             landmarkType = "0">
             <Locations>
                <Location
-                  uuid = "BFDDB564-B20A-4A5B-8179-59303DC11F3B - 526da12cef761928"
+                  uuid = "BFDDB564-B20A-4A5B-8179-59303DC11F3B - 526da12cef761909"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -62,8 +62,8 @@
                   urlString = "file:///Users/isaaker/Desarrollador/GitHub/Ghost_Simulator_iOS-iPadOS/ghost_archery_sim/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "959"
-                  endingLineNumber = "959"
+                  startingLineNumber = "960"
+                  endingLineNumber = "960"
                   offsetFromSymbolStart = "68">
                </Location>
                <Location

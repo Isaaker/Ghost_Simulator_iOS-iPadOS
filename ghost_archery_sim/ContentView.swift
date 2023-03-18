@@ -201,292 +201,293 @@ Contact Licensor:
 
 struct Navigation: View {
     @AppStorage ("Navigation_hidden") var current_window: String = ("Home")
-    @AppStorage ("Legal") var legal: Bool = true
-    @AppStorage ("Beta") var beta: Bool = true
+    @AppStorage ("Legal") var legal: Bool = false
+    @AppStorage ("Beta") var beta: Bool = false
     @AppStorage ("welcome") var welcome: Bool = true
+    @AppStorage ("welcome") var welcome_hidden: Bool = false
     var body: some View {
         if welcome == true {
-            VStack{
-                Spacer()
-                Text("Ghost Archery Simulator")
-                    .font(.largeTitle)
-                Image("app_icon")
-                Spacer()
-                Button(action: {
-                    welcome = false
-                    legal = false
-                    beta = false
-                }, label: {
-                    HStack{
-                        Text("Start")
-                            .font(.title)
-                    }
-                })
-                .buttonStyle(.borderedProminent)
-                Spacer()
-            }
-        }
-        //Legal Banner
-        if legal == false{
-            VStack{
-                Spacer()
-                Text("License")
-                    .font(.title)
-                Spacer()
-                Text("Please read the following license of use carefully")
-                    .multilineTextAlignment(.center)
-                Divider()
-                ScrollView {
-                    Text (license)
-                    GroupBox{
-                        Link(destination: URL(string: "https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS/blob/main/LICENSE.txt")!){
-                            Text("An online copy of the license can be found here")
-                        }
-                    }
-                }
-                Spacer()
-                GroupBox(){
-                    Text("By clicking Accept, you accept the terms of use, if at any time you would like to reject them, you must uninstall the application.")
-                        .multilineTextAlignment(.center)
-                    
-                }
-                Button(action: {legal=true}, label: {
-                    HStack{
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-                        Text("Accept")
-                    }
-                })
-                .buttonStyle(.borderedProminent)
-                Spacer()
-            }
-        }
-        else{
-            if beta == false{
+            if welcome_hidden == false{
                 VStack{
-                    HStack{
-                        Image(systemName: "testtube")
-                            .foregroundColor(.green)
-                        Text("App Beta Version")
-                            .font(.title)
-                    }
-                    Text("Hi Beta Tester, now you have access to the Ghost Archery Simulator App beta Version, to use the app you need to agree the following Terms. If you don't Accept it, you can't use this version of the App")
-                        .multilineTextAlignment(.center)
-                    Divider()
-                    ScrollView{
-                        HStack{
-                            Image(systemName: "1.circle.fill")
-                                .resizable()
-                                .foregroundColor(.blue)
-                                .frame(width: 40 ,height: 40)
-                            Text("The content of the application is confidential, and therefore can only be viewed by you, persons previously authorized by the license owner and other authorized developers.")
-                        }
-                        HStack{
-                            Image(systemName: "2.circle.fill")
-                                .resizable()
-                                .foregroundColor(.blue)
-                                .frame(width: 40 ,height: 40)
-                            Text("Distribution of the application beyond your personal devices and controlled by you was strictly prohibited without prior authorization from the licensor.")
-                        }
-                        HStack{
-                            Image(systemName: "3.circle.fill")
-                                .resizable()
-                                .foregroundColor(.blue)
-                                .frame(width: 40 ,height: 40)
-                            Text("Modification of this beta of the application is only authorized in the official repository, any other type of modification outside the aforementioned place is prohibited without express authorization from the licensor.")
-                        }
-                        GroupBox{
-                            Spacer()
-                            HStack{
-                                Image(systemName: "xmark.diamond.fill")
-                                    .foregroundColor(.red)
-                                Text("Consequences of infringement")
-                            }
-                            Text("Failure to comply with the rules will result in the withdrawal of access to the application, repositories and so on.In addition to be accompanied by legal action, the licensor reserves all rights.")
-                                .multilineTextAlignment(.center)
-                        }
-                        Spacer()
-                    }
                     Spacer()
-                    Button(action: {beta=true}, label: {
+                    Text("Ghost Archery Simulator")
+                        .font(.largeTitle)
+                    Image("app_icon")
+                    Spacer()
+                    Button(action: {
+                        legal = true
+                        welcome_hidden = true
+                    }, label: {
                         HStack{
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.green)
-                            Text("Accept")
+                            Text("Start")
+                                .font(.title)
                         }
                     })
                     .buttonStyle(.borderedProminent)
                     Spacer()
-                }
-            }
-            else{
-                if welcome == false{
-                    VStack {
-                        HStack{
-                            Image("app_icon")
-                                .resizable()
-                                .frame(width: 80, height: 80)
-                            //Reset Views
-                            Text("Ghost Archery Simulator")
-                                .multilineTextAlignment(.center)
-                                .font(.title)
+                        .popover(isPresented: $legal) {
+                            VStack{
+                                Spacer()
+                                Text("License")
+                                    .font(.title)
+                                Spacer()
+                                Text("Please read the following license of use carefully")
+                                    .multilineTextAlignment(.center)
+                                Divider()
+                                ScrollView {
+                                    Text (license)
+                                    GroupBox{
+                                        Link(destination: URL(string: "https://github.com/Isaaker/Ghost_Simulator_iOS-iPadOS/blob/main/LICENSE.txt")!){
+                                            Text("An online copy of the license can be found here")
+                                        }
+                                    }
+                                }
+                                Spacer()
+                                GroupBox(){
+                                    Text("By clicking Accept, you accept the terms of use, if at any time you would like to reject them, you must uninstall the application.")
+                                        .multilineTextAlignment(.center)
+                                    
+                                }
+                                Button(action: {
+                                    beta = true
+                                    legal = false
+                                }, label: {
+                                    HStack{
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(.green)
+                                        Text("Accept")
+                                    }
+                                })
+                                .buttonStyle(.borderedProminent)
+                                Spacer()
+                            }
                         }
-                        if current_window == "Home"{
-                            NavigationStack(root: {Home()})
+                        .popover(isPresented: $beta) {
+                            VStack{
+                                HStack{
+                                    Image(systemName: "testtube")
+                                        .foregroundColor(.green)
+                                    Text("App Beta Version")
+                                        .font(.title)
+                                }
+                                Text("Hi developer, now you have access to the Ghost Archery Simulator App beta Version, to use the app you need to agree the following Terms. If you don't Accept it, you can't use this version of the App")
+                                    .multilineTextAlignment(.center)
+                                Divider()
+                                ScrollView{
+                                    HStack{
+                                        Image(systemName: "1.circle.fill")
+                                            .resizable()
+                                            .foregroundColor(.blue)
+                                            .frame(width: 40 ,height: 40)
+                                        Text("The content of the application is confidential, and therefore can only be viewed by you, persons previously authorized by the license owner and other authorized developers.")
+                                    }
+                                    HStack{
+                                        Image(systemName: "2.circle.fill")
+                                            .resizable()
+                                            .foregroundColor(.blue)
+                                            .frame(width: 40 ,height: 40)
+                                        Text("Distribution of the application beyond your personal devices and controlled by you was strictly prohibited without prior authorization from the licensor.")
+                                    }
+                                    HStack{
+                                        Image(systemName: "3.circle.fill")
+                                            .resizable()
+                                            .foregroundColor(.blue)
+                                            .frame(width: 40 ,height: 40)
+                                        Text("Modification of this beta of the application is only authorized in the official repository, any other type of modification outside the aforementioned place is prohibited without express authorization from the licensor.")
+                                    }
+                                    GroupBox{
+                                        Spacer()
+                                        HStack{
+                                            Image(systemName: "xmark.diamond.fill")
+                                                .foregroundColor(.red)
+                                            Text("Consequences of infringement")
+                                        }
+                                        Text("Failure to comply with the rules will result in the withdrawal of access to the application, repositories and so on.In addition to be accompanied by legal action, the licensor reserves all rights.")
+                                            .multilineTextAlignment(.center)
+                                    }
+                                    Spacer()
+                                }
+                                Spacer()
+                                Button(action: {
+                                    beta = false
+                                    welcome = false
+                                }, label: {
+                                    HStack{
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(.green)
+                                        Text("Accept")
+                                    }
+                                })
+                                .buttonStyle(.borderedProminent)
+                                Spacer()
+                            }
                         }
-                        if current_window == "Simulator"{
-                            NavigationStack(root: {Simulator()})
-                        }
-                        if current_window == "History"{
-                            NavigationStack(root: {History()})
-                        }
-                        if current_window == "Utilities"{
-                            NavigationStack(root: {Utilities()})
-                        }
-                        if current_window == "Settings"{
-                            NavigationStack(root: {Settings()})
-                        }
-                        Divider()
-                        HStack{
-                            //Home
-                            if current_window == "Home"{
-                                VStack{
-                                    Image(systemName: "house.fill")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(.blue)
-                                    Text("Home")
-                                        .foregroundColor(.blue)
-                                }
-                                .onTapGesture {
-                                    current_window = "Home"
-                                }
-                            }
-                            else{
-                                VStack{
-                                    Image(systemName: "house.fill")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                    Text("Home")
-                                }
-                                .onTapGesture {
-                                    current_window = "Home"
-                                }
-                            }
-                            
-                            //Simulator
-                            if current_window == "Simulator"{
-                                VStack{
-                                    Image(systemName: "figure.archery")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(.blue)
-                                    Text("Simulator")
-                                        .foregroundColor(.blue)
-                                }
-                                .onTapGesture {
-                                    current_window = "Simulator"
-                                }
-                            }
-                            else{
-                                VStack{
-                                    Image(systemName: "figure.archery")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                    Text("Simulator")
-                                }
-                                .onTapGesture {
-                                    current_window = "Simulator"
-                                }
-                            }
-                            
-                            //History
-                            if current_window == "History"{
-                                VStack{
-                                    Image(systemName: "calendar.badge.clock")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(.blue)
-                                    Text("History")
-                                        .foregroundColor(.blue)
-                                }
-                                .onTapGesture {
-                                    current_window = "History"
-                                }
-                            }
-                            else{
-                                VStack{
-                                    Image(systemName: "calendar.badge.clock")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                    Text("History")
-                                }
-                                .onTapGesture {
-                                    current_window = "History"
-                                }
-                            }
-                            
-                            //utilities
-                            if current_window == "Utilities"{
-                                VStack{
-                                    Image(systemName: "screwdriver.fill")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(.blue)
-                                    Text("Utilities")
-                                        .foregroundColor(.blue)
-                                }
-                                .onTapGesture {
-                                    current_window = "Utilities"
-                                }
-                            }
-                            else{
-                                VStack{
-                                    Image(systemName: "screwdriver.fill")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                    Text("Utilities")
-                                }
-                                .onTapGesture {
-                                    current_window = "Utilities"
-                                }
-                            }
-                            
-                            //Settings
-                            if current_window == "Settings"{
-                                VStack{
-                                    Image(systemName: "gear")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(.blue)
-                                    Text("Settings")
-                                        .foregroundColor(.blue)
-                                }
-                                .onTapGesture {
-                                    current_window = "Settings"
-                                }
-                            }
-                            else{
-                                VStack{
-                                    Image(systemName: "gear")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                    Text("Settings")
-                                }
-                                .onTapGesture {
-                                    current_window = "Settings"
-                                }
-                            }
-                            
-                        }
-                    }
-                    .padding()
                 }
             }
         }
+        if welcome == false{
+            VStack {
+                HStack{
+                    Image("app_icon")
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                    //Reset Views
+                    Text("Ghost Archery Simulator")
+                        .multilineTextAlignment(.center)
+                        .font(.title)
+                }
+                if current_window == "Home"{
+                    NavigationStack(root: {Home()})
+                }
+                if current_window == "Simulator"{
+                    NavigationStack(root: {Simulator()})
+                }
+                if current_window == "History"{
+                    NavigationStack(root: {History()})
+                }
+                if current_window == "Utilities"{
+                    NavigationStack(root: {Utilities()})
+                }
+                if current_window == "Settings"{
+                    NavigationStack(root: {Settings()})
+                }
+                Divider()
+                HStack{
+                    //Home
+                    if current_window == "Home"{
+                        VStack{
+                            Image(systemName: "house.fill")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.blue)
+                            Text("Home")
+                                .foregroundColor(.blue)
+                        }
+                        .onTapGesture {
+                            current_window = "Home"
+                        }
+                    }
+                    else{
+                        VStack{
+                            Image(systemName: "house.fill")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                            Text("Home")
+                        }
+                        .onTapGesture {
+                            current_window = "Home"
+                        }
+                    }
+                    
+                    //Simulator
+                    if current_window == "Simulator"{
+                        VStack{
+                            Image(systemName: "figure.archery")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.blue)
+                            Text("Simulator")
+                                .foregroundColor(.blue)
+                        }
+                        .onTapGesture {
+                            current_window = "Simulator"
+                        }
+                    }
+                    else{
+                        VStack{
+                            Image(systemName: "figure.archery")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                            Text("Simulator")
+                        }
+                        .onTapGesture {
+                            current_window = "Simulator"
+                        }
+                    }
+                    
+                    //History
+                    if current_window == "History"{
+                        VStack{
+                            Image(systemName: "calendar.badge.clock")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.blue)
+                            Text("History")
+                                .foregroundColor(.blue)
+                        }
+                        .onTapGesture {
+                            current_window = "History"
+                        }
+                    }
+                    else{
+                        VStack{
+                            Image(systemName: "calendar.badge.clock")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                            Text("History")
+                        }
+                        .onTapGesture {
+                            current_window = "History"
+                        }
+                    }
+                    
+                    //utilities
+                    if current_window == "Utilities"{
+                        VStack{
+                            Image(systemName: "screwdriver.fill")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.blue)
+                            Text("Utilities")
+                                .foregroundColor(.blue)
+                        }
+                        .onTapGesture {
+                            current_window = "Utilities"
+                        }
+                    }
+                    else{
+                        VStack{
+                            Image(systemName: "screwdriver.fill")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                            Text("Utilities")
+                        }
+                        .onTapGesture {
+                            current_window = "Utilities"
+                        }
+                    }
+                    
+                    //Settings
+                    if current_window == "Settings"{
+                        VStack{
+                            Image(systemName: "gear")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.blue)
+                            Text("Settings")
+                                .foregroundColor(.blue)
+                        }
+                        .onTapGesture {
+                            current_window = "Settings"
+                        }
+                    }
+                    else{
+                        VStack{
+                            Image(systemName: "gear")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                            Text("Settings")
+                        }
+                        .onTapGesture {
+                            current_window = "Settings"
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
     }
 }
-
 struct Home: View {
     @AppStorage ("Navigation_hidden") var Navigation_hidden: Bool = true
     @AppStorage("user_info_banner") var user_info_banner: Bool = true
@@ -838,6 +839,11 @@ struct simulation: View {
 
 //History
 struct History: View {
+    enum types_of_history: Int {
+      case simulations
+      case counter
+    }
+    @State var history_type: types_of_history = .simulations
     var body: some View {
         VStack{
             HStack{
@@ -845,6 +851,10 @@ struct History: View {
                 Text("History")
                     .font(.title)
             }
+            Picker(selection: $history_type, content:{
+                Text("Simulations").tag(types_of_history.simulations)
+            })
+            .pickerStyle(.wheel)
             ScrollView{
                 //Content
             }
@@ -910,6 +920,14 @@ struct counter: View {
             }
         Spacer()
         HStack{
+            Button(action:{
+                //Save to history scrip
+            }, label:{
+                Image(systemName: "sdcard.fill")
+                    .foregroundColor(.red)
+                Text("Save")
+            })
+            .buttonStyle(.borderedProminent)
             Button(action:{
                 arrow_counter = 0
             }, label:{
@@ -1112,70 +1130,47 @@ struct appstorage: View {
                     .foregroundColor(.red)
                 Text("Remove App Storage Memory")
             }
+            Text("Deleting the storage deletes all the information in the application, including the history")
+                .foregroundColor(.red)
             Button("Remove", role: .destructive){
                 remove_confirmation = true
             }
-            Spacer()
-            /*GroupBox{
-                HStack{
-                    Image("hammer.circle.fill")
-                        .foregroundColor(.blue)
-                    Text("Developer Options (Advanced)")
-                    Toggle(" ",
-                                       isOn: $appstorage_developer)
+            .confirmationDialog("Are you sure to continue?, this operation can´t be undoed.", isPresented: $remove_confirmation){
+                Button("Confirm Remove", role: .destructive) {
+                    if let bundleID = Bundle.main.bundleIdentifier {UserDefaults.standard.removePersistentDomain(forName: bundleID)}
                 }
-                if appstorage_developer == true{
-                    VStack{
-                        Image(systemName: "externaldrive")
-                            .foregroundColor(.brown)
-                        TextField("Enter name of variable to remove", text: $variable_name)
-                        Button(action: {
-                            @AppStorage ("appstorage_developer") var appstorage_developer: Bool = false
-                            variable_name = ""
-                        }, label: {
-                            HStack{
-                                Image(systemName: "doc.badge.gearshape.fill")
-                                    .foregroundColor(.red)
-                                Text("Remove")
+            }
+            if remove_confirmation == true{
+                VStack{
+                    Spacer()
+                    Text("Press and hold 10 seconds the center button to confirm the deletion")
+                        .font(.title)
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                    Image(systemName: "trash.circle.fill")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .foregroundColor(.red)
+                        .onLongPressGesture(minimumDuration: 10, perform:{
+                            if let bundleID = Bundle.main.bundleIdentifier {
+                                UserDefaults.standard.removePersistentDomain(forName: bundleID)
+                                removed = true
                             }
                         })
-                        .buttonStyle(.borderedProminent)
-                        
-                    }
+                        .alert("App Storage Sucesfully Removed", isPresented: $removed) {
+                            Button("OK", role: .cancel, action:{
+                                removed = false
+                            })
+                        }
+                    Spacer()
+                    Text("Deleting the storage deletes all the information in the application, including the history")
+                        .multilineTextAlignment(.center)
+                    Spacer()
                 }
             }
-            */
+            Spacer()
         }
-        if remove_confirmation == true{
-            VStack{
-                Spacer()
-                Text("Press and hold 10 seconds the center button to confirm the deletion")
-                    .font(.title)
-                    .foregroundColor(.red)
-                    .multilineTextAlignment(.center)
-                Spacer()
-                Image(systemName: "trash.circle.fill")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(.red)
-                    .onLongPressGesture(minimumDuration: 10, perform:{
-                        if let bundleID = Bundle.main.bundleIdentifier {
-                            UserDefaults.standard.removePersistentDomain(forName: bundleID)
-                        removed = true
-                        }
-                    })
-                    .alert("App Storage Sucesfully Removed", isPresented: $removed) {
-                        Button("OK", role: .cancel, action:{
-                            removed = false
-                        })
-                    }
-                Spacer()
-                Text("Deleting the storage deletes all the information in the application, including the history")
-                    .multilineTextAlignment(.center)
-                Spacer()
-            }
-        }
-        Spacer()
     }
 }
 
